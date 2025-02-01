@@ -25,7 +25,25 @@
       "price": 23.99,
       "rating": 4,
       "featured": true,
-      "id": 4
+      "id": 3
+    },
+    {
+      "id": "a24f",
+      "name": "The Alchemist (1988",
+      "author": "Paulo Coelho",
+      "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
+      "price": "20",
+      "rating": "5",
+      "featured": false
+    },
+    {
+      "id": "85c1",
+      "name": "The Alchemist (1988",
+      "author": "Paulo Coelho",
+      "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654371463i/18144590.jpg",
+      "price": "20",
+      "rating": "5",
+      "featured": false
     }
   ]
 }
