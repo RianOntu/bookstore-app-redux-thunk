@@ -6,6 +6,7 @@ import AllBooksSvgFour from "./SVGS/AllBooksSvgFour";
 import AllBooksSvgFive from "./SVGS/AllBooksSvgFive";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../redux/thunk/getBooks";
+import { deleteBook, selectBook } from "../redux/actionCreators";
 
 function AllBooksSection() {
   const dispatch = useDispatch();
@@ -16,6 +17,12 @@ function AllBooksSection() {
 
   const all_books = useSelector((state) => state);
   console.log("allbooks", all_books);
+  const handleEdit = (book) => {
+    dispatch(selectBook(book));
+  };
+  const handleDelete = (book) => {
+    dispatch(deleteBook(book));
+  };
 
   return (
     <div className="order-2 xl:-order-1">
@@ -34,7 +41,7 @@ function AllBooksSection() {
 
       <div className="lws-bookContainer">
         {all_books.map((book) => (
-          <div className="book-card">
+          <div key={book.id} className="book-card">
             <img
               className="h-[240px] w-[170px] object-cover lws-bookThumbnail"
               src={book.thumbnail}
@@ -44,10 +51,13 @@ function AllBooksSection() {
               <div className="flex items-center justify-between">
                 <span className="badge-success lws-Badge">featured</span>
                 <div className="text-gray-500 space-x-2">
-                  <button className="lws-edit">
+                  <button className="lws-edit" onClick={() => handleEdit(book)}>
                     <AllBooksSvgOne />
                   </button>
-                  <button className="lws-delete">
+                  <button
+                    className="lws-delete"
+                    onClick={() => handleDelete(book)}
+                  >
                     <AllBooksSvgTwo />
                   </button>
                 </div>

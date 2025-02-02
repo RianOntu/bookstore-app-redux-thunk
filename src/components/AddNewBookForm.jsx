@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bookAdded from "../redux/thunk/addBook";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function AddNewBookForm() {
   const dispatch = useDispatch();
+  const books = useSelector((state) => state);
+  
+  
+  
+  const selectedBook = books.find((book) => book.isSelected);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -13,6 +18,18 @@ function AddNewBookForm() {
     rating: "",
     featured: false,
   });
+
+  useEffect(() => {
+    if (selectedBook) {
+      setFormData({
+        name: selectedBook.name,
+        thumbnail: selectedBook.thumbnail,
+        author: selectedBook.author,
+        price: selectedBook.price,
+        rating: selectedBook.rating,
+      });
+    }
+  }, [selectedBook]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,6 +43,14 @@ function AddNewBookForm() {
     e.preventDefault();
     console.log("Form Data Submitted: ", formData);
     dispatch(bookAdded(JSON.stringify(formData)));
+    setFormData({
+      name: "",
+      author: "",
+      thumbnail: "",
+      price: "",
+      rating: "",
+      featured: false,
+    });
   };
 
   return (
@@ -116,7 +141,7 @@ function AddNewBookForm() {
         </div>
 
         <button type="submit" className="submit" id="submit">
-          Add Book
+          {selectedBook?.editMode ? "Update Book" : "Add Book"}
         </button>
       </form>
     </div>
