@@ -46,12 +46,7 @@ function AddNewBookForm() {
     if (selectedBook?.editMode) {
       // Update the selected book
       dispatch(bookUpdate(JSON.stringify(formData)));
-    } else {
-      // Add new book
-      dispatch(bookAdded(JSON.stringify(formData)));
-    }
-
-    // Reset the form after submission
+         // Reset the form after submission
     setFormData({
       name: "",
       author: "",
@@ -60,6 +55,21 @@ function AddNewBookForm() {
       rating: "",
       featured: false,
     });
+    } else {
+      // Add new book
+      dispatch(bookAdded(JSON.stringify(formData)));
+         // Reset the form after submission
+    setFormData({
+      name: "",
+      author: "",
+      thumbnail: "",
+      price: "",
+      rating: "",
+      featured: false,
+    });
+    }
+
+ 
   };
 
   return (

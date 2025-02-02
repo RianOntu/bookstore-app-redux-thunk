@@ -12,11 +12,20 @@
     {
       "id": "acfe",
       "name": "The Alchemist",
-      "author": "aaaa",
+      "author": "Paulo Coelho",
       "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1485708476i/34043294.jpg",
-      "price": "41",
+      "price": "4",
       "rating": "3",
       "featured": true
+    },
+    {
+      "id": "6454",
+      "name": "Let Us C",
+      "author": "Yashavant Kanetkar",
+      "thumbnail": "https://assets.booksbybsf.com/products/LetUsCSolutions18thEditionAuthenticSolutionstoLetUsCExercises.webp",
+      "price": "20",
+      "rating": "3",
+      "featured": false
     }
   ]
 }

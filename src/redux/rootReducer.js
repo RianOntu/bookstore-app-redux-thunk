@@ -1,6 +1,7 @@
 import {
   ADDED,
   DELETED,
+  FILTER,
   LOADED,
   SELECTED,
   SET_SEARCH_TERM,
@@ -33,13 +34,18 @@ const rootReducer = (state = initialState, action) => {
             : { ...book, isSelected: false, editMode: false }
         ),
       };
-      case UPDATED:
-        return {
-          ...state,
-          books: state.books.map((book) =>
-            book.id === action.payload.id ? { ...book, ...action.payload } : book
-          ),
-        };
+    case UPDATED:
+      return {
+        ...state,
+        books: state.books.map((book) =>
+          book.id === action.payload.id ? { ...book, ...action.payload } : book
+        ),
+      };
+    case FILTER:
+      return {
+        ...state,
+        filterTerm: action.payload,
+      };
 
     case DELETED:
       return {

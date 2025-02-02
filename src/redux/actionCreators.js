@@ -1,6 +1,7 @@
 import {
   ADDED,
   DELETED,
+  FILTER,
   SELECTED,
   SET_SEARCH_TERM,
   UPDATED,
@@ -32,5 +33,9 @@ export const deleteBook = (bookId) => {
 };
 export const setSearchTerm = (term) => ({
   type: SET_SEARCH_TERM,
+  payload: term,
+});
+export const bookFilter = (term) => ({
+  type: FILTER,
   payload: term,
 });
