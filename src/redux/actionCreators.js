@@ -1,4 +1,10 @@
-import { ADDED, DELETED, SELECTED, UPDATED } from "./actionTypes";
+import {
+  ADDED,
+  DELETED,
+  SELECTED,
+  SET_SEARCH_TERM,
+  UPDATED,
+} from "./actionTypes";
 
 export const bookAdd = (book) => {
   return {
@@ -18,9 +24,13 @@ export const updateBook = (book) => {
     payload: book,
   };
 };
-export const deleteBook = (bookToDelete) => {
+export const deleteBook = (bookId) => {
   return {
     type: DELETED,
-    payload: bookToDelete,
+    payload: bookId,
   };
 };
+export const setSearchTerm = (term) => ({
+  type: SET_SEARCH_TERM,
+  payload: term,
+});

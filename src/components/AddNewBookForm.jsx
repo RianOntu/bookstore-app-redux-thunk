@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import bookAdded from "../redux/thunk/addBook";
 import { useDispatch, useSelector } from "react-redux";
+import bookAdded from "../redux/thunk/addBook";
+import bookUpdate from "../redux/thunk/updateBook";
 
 function AddNewBookForm() {
   const dispatch = useDispatch();
-  const books = useSelector((state) => state);
-  
-  
-  
-  const selectedBook = books.find((book) => book.isSelected);
+  const books = useSelector((state) => state.books);
+
+  const selectedBook = books?.find((book) => book.isSelected);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,11 +21,13 @@ function AddNewBookForm() {
   useEffect(() => {
     if (selectedBook) {
       setFormData({
+        id: selectedBook.id,
         name: selectedBook.name,
         thumbnail: selectedBook.thumbnail,
         author: selectedBook.author,
         price: selectedBook.price,
         rating: selectedBook.rating,
+        featured: selectedBook.featured,
       });
     }
   }, [selectedBook]);
@@ -41,8 +42,16 @@ function AddNewBookForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
-    dispatch(bookAdded(JSON.stringify(formData)));
+
+    if (selectedBook?.editMode) {
+      // Update the selected book
+      dispatch(bookUpdate(JSON.stringify(formData)));
+    } else {
+      // Add new book
+      dispatch(bookAdded(JSON.stringify(formData)));
+    }
+
+    // Reset the form after submission
     setFormData({
       name: "",
       author: "",
@@ -55,7 +64,9 @@ function AddNewBookForm() {
 
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
-      <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
+      <h4 className="mb-8 text-xl font-bold text-center">
+        {selectedBook?.editMode ? "Edit Book" : "Add New Book"}
+      </h4>
       <form className="book-form" onSubmit={handleSubmit}>
         <div className="space-y-2">
           <label htmlFor="name">Book Name</label>

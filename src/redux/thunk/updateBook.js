@@ -1,8 +1,11 @@
 import { updateBook } from "../actionCreators";
 
 const bookUpdate = (book) => {
+  const selectedBook = JSON.parse(book);
+  const bookId = selectedBook.id;
+
   return async (dispatch) => {
-    const response = await fetch(`http://localhost:9000/books`, {
+    const response = await fetch(`http://localhost:9000/books/${bookId}`, {
       method: "PATCH",
       body: book,
       headers: {

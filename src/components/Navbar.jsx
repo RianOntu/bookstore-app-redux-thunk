@@ -1,7 +1,15 @@
-import React from "react";
+import { useDispatch } from "react-redux";
 import NavBarSvg from "./SVGS/NavBarSvg";
+import { setSearchTerm } from "../redux/actionCreators";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  
+
+  const handleSearchChange = (e) => {
+    dispatch(setSearchTerm(e.target.value));
+  };
+
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -21,6 +29,7 @@ function Navbar() {
               placeholder="Filter books..."
               className="search"
               id="lws-searchBook"
+              onChange={handleSearchChange}
             />
           </div>
         </form>
@@ -28,5 +37,4 @@ function Navbar() {
     </nav>
   );
 }
-
 export default Navbar;
