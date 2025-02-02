@@ -11,18 +11,36 @@
     },
     {
       "id": "acfe",
-      "name": "The Alchemist",
-      "author": "Paulo Coelho",
+      "name": "The Alchemist (1988)",
+      "author": "Paulo Coelh00",
       "thumbnail": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1485708476i/34043294.jpg",
-      "price": "4",
+      "price": "423",
       "rating": "3",
       "featured": true
     },
     {
       "id": "6454",
-      "name": "Let Us C",
+      "name": "The Let Us C",
       "author": "Yashavant Kanetkar",
       "thumbnail": "https://assets.booksbybsf.com/products/LetUsCSolutions18thEditionAuthenticSolutionstoLetUsCExercises.webp",
+      "price": "20",
+      "rating": "3",
+      "featured": false
+    },
+    {
+      "id": "4a9e",
+      "name": "C++",
+      "author": "Dennis Richie",
+      "thumbnail": "https://cdn.hackr.io/uploads/posts/attachments/1689180414a8ySbhcX4v.png",
+      "price": "12",
+      "rating": "3",
+      "featured": true
+    },
+    {
+      "id": "0a08",
+      "name": "Python for Everybody",
+      "author": "Charles",
+      "thumbnail": "https://media3.ubook.com/catalog/book-cover-image/347551/400x600/347551-2105141400-python-for-everybody-audiopy4e.jpg",
       "price": "20",
       "rating": "3",
       "featured": false

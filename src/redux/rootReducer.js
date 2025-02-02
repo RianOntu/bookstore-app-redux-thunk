@@ -3,6 +3,7 @@ import {
   DELETED,
   FILTER,
   LOADED,
+  REMOVE_SELECTED_BOOK,
   SELECTED,
   SET_SEARCH_TERM,
   UPDATED,
@@ -56,6 +57,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state, // Spread the existing state
         searchTerm: action.payload, // Set the new search term
+      };
+    case REMOVE_SELECTED_BOOK:
+      return {
+        ...state,
+        books: state.books.map((book) => ({
+          ...book,
+          isSelected: false, // Reset 'isSelected' for all books
+        })),
       };
     default:
       return state; // Return the unchanged state by default

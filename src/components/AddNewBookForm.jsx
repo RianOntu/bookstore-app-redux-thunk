@@ -4,10 +4,10 @@ import bookAdded from "../redux/thunk/addBook";
 import bookUpdate from "../redux/thunk/updateBook";
 
 function AddNewBookForm() {
+  const books = useSelector((state) => state?.books);
+  const selectedBook = books?.find((book) => book?.isSelected);
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books);
-
-  const selectedBook = books?.find((book) => book.isSelected);
+  const [editMode, setEditMode] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -20,6 +20,7 @@ function AddNewBookForm() {
 
   useEffect(() => {
     if (selectedBook) {
+      setEditMode(true); // Enable editMode if a book is selected
       setFormData({
         id: selectedBook.id,
         name: selectedBook.name,
@@ -29,6 +30,16 @@ function AddNewBookForm() {
         rating: selectedBook.rating,
         featured: selectedBook.featured,
       });
+    } else {
+      setEditMode(false); // Reset editMode when no book is selected
+      setFormData({
+        name: "",
+        author: "",
+        thumbnail: "",
+        price: "",
+        rating: "",
+        featured: false,
+      }); // Clear formData for new book
     }
   }, [selectedBook]);
 
@@ -43,39 +54,44 @@ function AddNewBookForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (selectedBook?.editMode) {
+    if (editMode) {
       // Update the selected book
       dispatch(bookUpdate(JSON.stringify(formData)));
-         // Reset the form after submission
-    setFormData({
-      name: "",
-      author: "",
-      thumbnail: "",
-      price: "",
-      rating: "",
-      featured: false,
-    });
+
+      // Optionally, dispatch a reset action here to remove the 'isSelected' flag
+      dispatch({ type: "REMOVE_SELECTED_BOOK" }); // This action will reset the selected book in Redux
+
+      setEditMode(false); // Exit edit mode
+
+      // Reset the form data after update
+      setFormData({
+        name: "",
+        author: "",
+        thumbnail: "",
+        price: "",
+        rating: "",
+        featured: false,
+      });
     } else {
       // Add new book
       dispatch(bookAdded(JSON.stringify(formData)));
-         // Reset the form after submission
-    setFormData({
-      name: "",
-      author: "",
-      thumbnail: "",
-      price: "",
-      rating: "",
-      featured: false,
-    });
-    }
 
- 
+      // Reset the form after submission
+      setFormData({
+        name: "",
+        author: "",
+        thumbnail: "",
+        price: "",
+        rating: "",
+        featured: false,
+      });
+    }
   };
 
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
       <h4 className="mb-8 text-xl font-bold text-center">
-        {selectedBook?.editMode ? "Edit Book" : "Add New Book"}
+        {editMode ? "Edit Book" : "Add New Book"}
       </h4>
       <form className="book-form" onSubmit={handleSubmit}>
         <div className="space-y-2">
@@ -162,7 +178,7 @@ function AddNewBookForm() {
         </div>
 
         <button type="submit" className="submit" id="submit">
-          {selectedBook?.editMode ? "Update Book" : "Add Book"}
+          {editMode ? "Update Book" : "Add Book"}
         </button>
       </form>
     </div>

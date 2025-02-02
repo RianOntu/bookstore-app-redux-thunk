@@ -30,21 +30,21 @@ function AllBooksSection() {
   const [filterBooks, setFilterBooks] = useState([]);
 
   useEffect(() => {
+    let filteredBooks = [...all_books];
+  
+    // Apply search filtering if searchTerm exists
     if (searchTerm) {
-      const filteredBooks = all_books.filter((book) =>
+      filteredBooks = filteredBooks.filter((book) =>
         book.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
-
-      setFilterBooks(filteredBooks);
-    } else if (filterTerm) {
-      const filteredBooks = all_books.filter(
-        (book) => book.featured == filterTerm
-      );
-
-      setFilterBooks(filteredBooks);
-    } else {
-      setFilterBooks(all_books);
     }
+  
+    // Apply featured filter if filterTerm exists
+    if (filterTerm) {
+      filteredBooks = filteredBooks.filter((book) => book.featured === filterTerm);
+    }
+  
+    setFilterBooks(filteredBooks);
   }, [all_books, searchTerm, filterTerm]);
 
   // Log the books for debugging

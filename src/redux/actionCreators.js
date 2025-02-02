@@ -39,3 +39,7 @@ export const bookFilter = (term) => ({
   type: FILTER,
   payload: term,
 });
+// In your Redux actions file
+export const removeSelectedBook = () => ({
+  type: "REMOVE_SELECTED_BOOK",
+});
